@@ -1,4 +1,5 @@
-# g2u-panels
+# G2u-VuePane
+뷰로 구현한 분리가 가능한 Pane, 
 
 ## 구현한 것
 ```
