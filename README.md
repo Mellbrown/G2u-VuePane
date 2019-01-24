@@ -1,6 +1,8 @@
 # G2u-VuePane
 뷰로 구현한 분리가 가능한 Pane, 
 
+데모사이트:  https://mellbrown.github.io/G2u-VuePane/
+
 ## 구현한 것
 ```
 - 탭 화면
