@@ -1,29 +1,14 @@
 # g2u-panels
 
-## Project setup
+## 구현한 것
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+- 탭 화면
+- 분리 가능한 펜
+- 메뉴
 ```
 
-### Compiles and minifies for production
+## 구현할 것
 ```
-npm run build
+- 드래그 앤 드롭
+- 섹션 분할
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

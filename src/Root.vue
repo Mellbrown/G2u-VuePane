@@ -26,7 +26,7 @@ export default {
       this.newTab('/0',{ type:'Menu', title:'menu' })
     this.newPanes('/',{ direction:'row'})
       this.newPane('/1', { nobar: true })
-        this.newTab('/1/0',{ type: 'Hello', title: 'Hello!'})
+        this.newTab('/1/0',{ type: 'HelloWorld', title: 'Hello!'})
     
     this.bus.$on('paneResize', option => {
       var { key , size } = option
