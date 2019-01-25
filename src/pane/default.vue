@@ -8,9 +8,11 @@
       fontWeight: 'lighter',
       color : 'gray'
     }">
-      <div class="p-2 border border-secondary rounded">
-        <h2>탭이 비어있습니다</h2>
-      </div>
+      <transition name="show">
+        <div class="p-2 border border-secondary rounded">
+          <h2>탭이 비어있습니다</h2>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -26,6 +28,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+.show-enter {
+  opacity: 0;
+}
+.show-enter-active {
+  transition: opacity 1s;
+}
 </style>
+

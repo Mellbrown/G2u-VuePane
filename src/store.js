@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    panebus: null
+    panebus: null,
+    dragbus: null
   },
   mutations: {
 
