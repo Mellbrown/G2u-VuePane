@@ -1,19 +1,9 @@
 <template>
   <div :style="{
-    height: '30px',
-    width: '40px',
-    border: 'dotted 2pt black'
+    height: '20px',
+    width: '30px',
+    border: 'dotted 1.5pt gray'
   }">
 
   </div>
 </template>
-
-<script>
-export default {
-
-}
-</script>
-
-<style>
-
-</style>

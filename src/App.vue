@@ -6,10 +6,12 @@
       :param="syspane.root.param"
       :parent="syspane.root.parent"
       :child="syspane.root.child"/>
+    <drag/>
   </div>
 </template>
 <script>
 import Panes from '@/g2u/Panes.vue'
+import Drag from '@/g2u/Drag.vue'
 import { mapMutations, mapState } from 'vuex'
 
 export default {
@@ -29,7 +31,7 @@ export default {
     })
   },
   computed: {
-    ...mapState(['syspane'])
+    ...mapState(['syspane','sysdrag'])
   },
   methods: {
     ...mapMutations([
@@ -38,7 +40,7 @@ export default {
       'pane_open'
     ])
   },
-  components: { Panes },
+  components: { Panes, Drag },
   name: 'app'
 }
 </script>

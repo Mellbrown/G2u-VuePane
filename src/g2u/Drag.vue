@@ -1,60 +1,62 @@
 <template>
-  <div class="g2u-drag">
-    <component :is="dragcomp" v-if="dragcomp" />
+  <div class="g2u-drag absolute" :style="styPosition">
+    <d-comp v-if="sysdrag"
+      path="drag"
+      :type="sysdrag.type"
+      :param="sysdrag.param"
+      :_id="null"
+      :parent="null"
+      :wrap_content="true"/>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+import DComp from '@/g2u/DComp'
+import { mapState, mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
-      bus: new Vue(),
-      dragitem: null,
-      dragcomp: null,
-      mousemove: null,
-      mouseup: null
+      clientPos: null
     }
   },
   mounted () {
-    this.$store.state.dragbus = this.bus
-    this.bus.$on('dragStart', option => {
-      var { dragitem } = option
-      this.dragitem = dragitem
-      this.mousemove = window.addEventListener('mousemove', this.windowMouseMove)
-      this.mouseup = window.addEventListener('mouseup', this.windowMouseUp)
-    })
-  },
-  methods: {
-    windowMouseMove (e) {
-      var { clientX, clientY } = e
-      console.log(clientX, clientY)
-    },
-    windowMouseUp (e) {
-      this.dragitem = null
-      window.removeEventListener('mousemove', this.mousemove)
-      window.removeEventListener('mouseup', this.mouseup)
-    }
-  },
-  computed: {
-    loader () {
-      if (!this.dragitem) {
-        return () => import(`@/drag/default`)
-      }
-      return () => import(`@/drag/${this.dragitem}`)
-    }
+    this.drag_init()
   },
   watch: {
-    contentType () {
-      this.loader()
-        .then(() => {
-          this.dragcomp = () => this.loader()
-        })
-        .catch(() => {
-          this.dragcomp = () => import(`@/drag/default`)
-        })
+    ['sysdrag.type'] (_new, _old) {
+      if (!!_new && !_old) {
+        window.addEventListener('mouseup',this.windowonmouseup)
+        window.addEventListener('mousemove', this.windowonmousemove)
+        this.clientPos = { x: this.sysdrag.startX, y: this.sysdrag.startY }
+      }
     }
-  }
+  },
+  methods: {
+    windowonmouseup (e) {
+      window.removeEventListener('mouseup',this.windowonmouseup)
+      window.removeEventListener('mousemove', this.windowonmousemove)
+      this.clientPos = null
+      this.drag_cancle()
+    },
+    windowonmousemove (e) {
+      this.clientPos = { x: e.clientX, y: e.clientY }
+    },
+    ...mapMutations([
+      'drag_init',
+      'drag_cancle'
+      ])
+  },
+  computed: {
+    styPosition () {
+      return {
+        top: this.clientPos && this.clientPos.y + 'px',
+        left: this.clientPos && this.clientPos.x +'px'
+      }
+    },
+    ...mapState(['sysdrag'])
+  },
+  components: { DComp }
 }
 </script>
 

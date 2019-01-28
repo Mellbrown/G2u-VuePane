@@ -20,7 +20,8 @@ html, body, #app {
 .v-stack { flex-direction: column-reverse; }
 .point { cursor: pointer; }
 
-.rel { position: relative; }
+.relative { position: relative; }
+.absolute { position: absolute;}
 .midcen {
   display: inline-block;
   position: absolute;

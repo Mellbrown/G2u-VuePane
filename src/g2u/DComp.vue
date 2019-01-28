@@ -1,5 +1,5 @@
 <template>
-  <div class="flex grow">
+  <div :class="clsWrapcontent">
     <component v-if="component" :is="component"
       :_id="_id"
       :type="type"
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ['path', '_id', 'type', 'param', 'parent'],
+  props: ['path', '_id', 'type', 'param', 'parent', 'wrap_content'],
   data () {
     return {
       component: null
@@ -22,6 +22,9 @@ export default {
         return () => import(`@/${this.path}/default.vue`)
       }
       return () => import(`@/${this.path}/${this.type}`)
+    },
+    clsWrapcontent () {
+      return this.wrap_content ? ['in-block'] : ['flex', 'grow']
     }
   },
   watch: {
