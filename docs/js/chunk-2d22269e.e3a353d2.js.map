@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///../g2u-panels/src/assets/logo.png"],"names":["module","exports","__webpack_require__","p"],"mappings":"mGAAAA,EAAAC,QAAiBC,EAAAC,EAAuB","file":"js/chunk-2d22269e.e3a353d2.js","sourcesContent":["module.exports = __webpack_public_path__ + \"img/logo.82b9c7a5.png\";"],"sourceRoot":""}

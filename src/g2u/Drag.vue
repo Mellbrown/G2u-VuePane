@@ -33,15 +33,15 @@ export default {
     windowMouseUp (e) {
       this.dragitem = null
       window.removeEventListener('mousemove', this.mousemove)
-      window.removeEventListener('mouseup',this.mouseup)
+      window.removeEventListener('mouseup', this.mouseup)
     }
   },
   computed: {
     loader () {
       if (!this.dragitem) {
-        return () => import(`./drag/default`)
+        return () => import(`@/drag/default`)
       }
-      return () => import(`./drag/${this.dragitem}`)
+      return () => import(`@/drag/${this.dragitem}`)
     }
   },
   watch: {
@@ -51,9 +51,9 @@ export default {
           this.dragcomp = () => this.loader()
         })
         .catch(() => {
-          this.dragcomp = () => import(`./drag/default`)
+          this.dragcomp = () => import(`@/drag/default`)
         })
-    },
+    }
   }
 }
 </script>
@@ -63,4 +63,3 @@ export default {
   position: absolute;
 }
 </style>
-

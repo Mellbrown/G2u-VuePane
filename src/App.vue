@@ -1,42 +1,44 @@
 <template>
   <div id="app">
-    <root />
+    <panes v-if="syspane"
+      :_id="syspane.root._id"
+      :type="syspane.root.type"
+      :param="syspane.root.param"
+      :parent="syspane.root.parent"
+      :child="syspane.root.child"/>
   </div>
 </template>
 <script>
-import Root from './Root.vue'
+import Panes from '@/g2u/Panes.vue'
+import { mapMutations, mapState } from 'vuex'
+
 export default {
-  components: { Root }
+  mounted () {
+    this.pane_init()
+    var context = {}
+    this.pane_root(context)
+    this.pane_open({ context, type: 'Menu', param: { width: 'auto' } })
+    this.pane_open({ context, type: 'pane', param: {} })
+    context.grab = context.open
+    this.pane_open({
+      context,
+      type: 'HelloWorld',
+      param: {
+        title: '만나서 반갑습니다.'
+      }
+    })
+  },
+  computed: {
+    ...mapState(['syspane'])
+  },
+  methods: {
+    ...mapMutations([
+      'pane_init',
+      'pane_root',
+      'pane_open'
+    ])
+  },
+  components: { Panes },
+  name: 'app'
 }
 </script>
-
-<style lang="scss">
-html, body, #app {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  user-select: none;
-}
-
-.dib { display: inline-block; }
-.df { display: flex; }
-.fc { flex-direction: column; }
-.fd { flex-direction: column-reverse; }
-.fr { flex-direction: row-reverse; }
-.fg { flex-grow: 1; }
-.fb { flex-basis: 0;}
-.fac {
-  align-items: center;
-}
-.point {
-  cursor: pointer;
-
-}
-.wh-30{
-  height: 30px;
-  width: 30px;
-}
-.shb {
-  filter: drop-shadow(0px 10px 5px rgba(0,0,0,0.5));
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="df fg fb fc">
+  <div class="flex grow">
     <h1 class="m-1">메뉴</h1>
     <div class="btn bg-light m-2" @click="openHello">
       헬로
@@ -8,24 +8,18 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex'
+
 export default {
-  data () {
-    return {
-      bus: null
-    }
+  computed: {
+    ...mapState(['syspane'])
   },
   methods: {
     openHello () {
-      this.bus.$emit('openTab',{
-        key:'/1/0',
-        type: 'Hello',
-        title: 'Unititle',
-        info: {}
-      })
-    }
-  },
-  mounted () {
-    this.bus = this.$store.state.panebus
+      var context = { grab: this.syspane.activate }
+      this.pane_open({ context, type: 'HelloWorld', param: { title: 'Untitled' } })
+    },
+    ...mapMutations(['pane_open'])
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="df fg fb bg-secondary">
-    <div class="bg-dark df fc" :style="{width: '60px'}">
+  <div class="flex grow h-left bg-secondary">
+    <div class="flex bg-dark" :style="{width: '60px'}">
       <div class="btn p-2 m-1 text-white"
         :style="{fontWeight:'bold'}"
         :class="current === 'MainMenu' ? ['bg-secondary'] : []"
@@ -11,7 +11,7 @@
         @click="toggleMenu('other')">
         <icon icon="adjust" size="lg" color="white"/>
       </div>
-      <div class="df fg fb fd">
+      <div class="flex grow v-stack">
         <div class="btn p-2 m-1"
           :class="current === 'setting' ? ['bg-secondary'] : []"
           @click="toggleMenu('setting')">
@@ -24,15 +24,12 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import MainMenu from '../menu/MainMenu.vue'
+import { mapMutations } from 'vuex'
+import MainMenu from '@/menu/MainMenu.vue'
 
 export default {
   components: { MainMenu },
-  props: {
-    info: { type: Object, default: () => {} },
-    bus: { type: Vue, default: () => new Vue() }
-  },
+  props: ['_id', 'type', 'param', 'parent'],
   data () {
     return {
       current: ''
@@ -40,17 +37,20 @@ export default {
   },
   methods: {
     toggleMenu (menu) {
-      if( this.current === menu ) {
+      if (this.current === menu) {
         this.current = null
       } else this.current = menu
-    }
+    },
+    ...mapMutations(['pane_grab', 'pane_resize'])
   },
   watch: {
     current (_new, _old) {
-      if (!_new && !!_old ) {// 사라졌다
-        this.bus.$emit('resize', { key: this.info.key , size:{width: 'auto'}})
-      } else if (!!_new && !_old){ // 생겼다
-        this.bus.$emit('resize', { key: this.info.key , size:{width: '300px'}})
+      var context = {}
+      this.pane_grab({ context, _id: this._id })
+      if (!_new && !!_old) { // 사라졌다
+        this.pane_resize({ context, size: { width: 'auto' } })
+      } else if (!!_new && !_old) { // 생겼다
+        this.pane_resize({ context, size: { width: '300px' } })
       }
     }
   }
