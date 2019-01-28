@@ -15,20 +15,24 @@
         </button>
       </div>
     </div>
-    <d-comp
-      path="pane"
-      v-if="content"
-      :_id="content._id"
-      :type="content.type"
-      :param="content.param"
-      :parent="content.parent"/>
+    <div class="flex grow relative">
+      <d-comp
+        path="pane"
+        v-if="content"
+        :_id="content._id"
+        :type="content.type"
+        :param="content.param"
+        :parent="content.parent"/>
+      <pane-drop-zone/>
+    </div>
   </div>
 </template>
 
 <script>
 import Tab from '@/g2u/Tab.vue'
 import DComp from '@/g2u/DComp.vue'
-import { mapMutations } from 'vuex'
+import PaneDropZone from '@/g2u/PaneDropZone.vue'
+import { mapMutations  } from 'vuex'
 
 export default {
   props: ['_id', 'type', 'param', 'parent', 'child'],
@@ -67,7 +71,7 @@ export default {
       }
     }
   },
-  components: { Tab, DComp }
+  components: { Tab, DComp, PaneDropZone }
 }
 </script>
 

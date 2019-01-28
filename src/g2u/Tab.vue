@@ -5,6 +5,7 @@
     @click.middle="closeTab"
     @mousedown="ismousedown = true"
     @mouseup="ismousedown = false"
+    @mouseleave="ismousedown = false"
     @mousemove="onmousemove">
     <button class="btn mr-1 p-0"
       @click.stop="closeTab">
@@ -35,7 +36,6 @@ export default {
             title: this.param.title
           }
         })
-        this.ismousedown = false
       }
     },
     activateTab () {
