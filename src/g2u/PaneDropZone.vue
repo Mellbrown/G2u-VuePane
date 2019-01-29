@@ -54,7 +54,7 @@ export default {
         this.pane_open({ context, type: 'panes', param: { direction: 'vertical' } }) // ver panes
         this.pane_grab({ context, _id: this._id }) // select close target
         this.pane_close(context)
-        var pop = context.grab
+        let pop = context.grab
         context.grab = context.open
         this.pane_append({ context, pane: pop }) // 기존거 복구
         context.openAt = over === 'top' ? 0 : 1
@@ -62,6 +62,31 @@ export default {
         context.grab = context.open
         context.openAt = null
         this.pane_append({ context, pane: drop }) // drop 복구
+      } else if (direct === 'vertical' && (over === 'top' || over === 'bottom')) {
+        context.grab = this.parent
+        this.pane_nth({ context, _id: this._id })
+        context.openAt = context.nth + (this.over === 'bottom' ? 1 : 0)
+        this.pane_open({ context, type: 'pane', param: {} })
+        context.grab = context.open
+        this.pane_append({ context, pane: drop })
+      } else if (direct === 'vertical' && (over === 'left' || over === 'right')) {
+        context.grab = this.parent
+        this.pane_nth({ context, _id: this._id })
+        context.openAt = context.nth // current position
+        this.pane_open({ context, type: 'panes', param: { direction: 'horizontal' } }) // ver panes
+        this.pane_grab({ context, _id: this._id }) // select close target
+        this.pane_close(context)
+        let pop = context.grab
+        context.grab = context.open
+        this.pane_append({ context, pane: pop }) // 기존거 복구
+        context.openAt = over === 'left' ? 0 : 1
+        this.pane_open({ context, type: 'pane', param: {} }) // pane 열기
+        context.grab = context.open
+        context.openAt = null
+        this.pane_append({ context, pane: drop }) // drop 복구
+      } else if (over === 'center') {
+        this.pane_grab({ context, _id: this._id })
+        this.pane_append({ context, pane: drop })
       }
     },
     ...mapMutations([

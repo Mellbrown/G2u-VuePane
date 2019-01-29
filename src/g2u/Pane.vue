@@ -7,7 +7,7 @@
         :param="tab.param"
         :child="tab.child"
         :parent="tab.parent"
-        :activated="content_id === tab._id"
+        :activated="param.content_id === tab._id"
         @onactivate="onTabSelected"/>
       <div class="flex grow h-right">
         <button class="btn p-1 mr-2">
@@ -36,11 +36,6 @@ import { mapMutations } from 'vuex'
 
 export default {
   props: ['_id', 'type', 'param', 'parent', 'child'],
-  data () {
-    return {
-      content_id: null
-    }
-  },
   mounted () {
     this.activate()
   },
@@ -51,7 +46,9 @@ export default {
   },
   methods: {
     onTabSelected (_id) {
-      this.content_id = _id
+      var context = {}
+      this.pane_grab({ context, _id: this._id })
+      this.pane_param({ context, param: { content_id: _id } })
       this.activate()
     },
     activate () {
@@ -61,6 +58,7 @@ export default {
     },
     ...mapMutations([
       'pane_grab',
+      'pane_param',
       'pane_activate',
       'pane_deactivate',
       'pane_close'
@@ -68,10 +66,15 @@ export default {
   },
   watch: {
     child () {
-      if (!this.child.find(ch => ch._id === this.content_id)) { this.content_id = null }
+      if (!this.child.find(ch => ch._id === this.param.content_id)) {
+        let context = {}
+        this.pane_grab({ context, _id: this._id })
+        var _id = this.child.length === 0 ? null : this.child[this.child.length - 1]._id
+        this.pane_param({ context, param: { content_id: _id } })
+      }
       if (this.child.length === 0) {
         if (!(this.parent._id === 'root' && this.parent.child.length === 2)) {
-          var context = {}
+          let context = {}
           this.pane_grab({ context, _id: this._id })
           this.pane_close(context)
         }
@@ -81,7 +84,7 @@ export default {
   computed: {
     content () {
       var context = {}
-      this.pane_grab({ context, _id: this.content_id })
+      this.pane_grab({ context, _id: this.param.content_id })
       return context.grab || {
         id: null,
         param: {

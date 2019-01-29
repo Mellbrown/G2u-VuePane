@@ -29,10 +29,35 @@
 <script>
 import DComp from '@/g2u/DComp.vue'
 import Pane from '@/g2u/Pane.vue'
+import { mapMutations } from 'vuex'
 
 export default {
   props: ['_id', 'type', 'param', 'parent', 'child'],
   name: 'panes',
+  watch: {
+    child () {
+      if (this.child.length <= 1) {
+        if (this.child.length === 1) {
+          // 먼저 자식 제거
+          var child = this.child[0]
+          this.pane_close({ grab: child })
+
+          // 삽입할 위치 찾기
+          var context = { grab: this.parent }
+          this.pane_nth({ context, _id: this._id })
+          context.openAt = context.nth
+          this.pane_append({ context, pane: child })
+        }
+
+        // 마지막 이팬 제거
+        this.pane_grab({ context, _id: this._id })
+        this.pane_close(context)
+      }
+    }
+  },
+  methods: {
+    ...mapMutations(['pane_close', 'pane_grab', 'pane_nth', 'pane_append'])
+  },
   computed: {
     clsDirection () {
       return [this.param.direction === 'vertical' ? '' : 'h-left']

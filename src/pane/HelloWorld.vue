@@ -33,7 +33,7 @@ export default {
       var context = {}
       this.pane_grab({ context, _id: this._id })
       if (!context.grab) return
-      this.pane_setTitle({ context, title: '🙌 안녕하세요! ' + this.param.alias })
+      this.pane_setTitle({ context, title: '🙌 ' + this.param.alias })
     },
     setalias () {
       var context = {}
@@ -41,7 +41,7 @@ export default {
       this.pane_param({ context,
         param: {
           alias: this.text,
-          title: '🙌 안녕하세요! ' + this.text
+          title: '🙌 ' + this.text
         } })
     },
     ...mapMutations(['pane_grab', 'pane_setTitle', 'pane_param'])
