@@ -31,7 +31,7 @@ export default {
     })
   },
   computed: {
-    ...mapState(['syspane','sysdrag'])
+    ...mapState(['syspane', 'sysdrag'])
   },
   methods: {
     ...mapMutations([

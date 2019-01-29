@@ -16,4 +16,3 @@ export default {
   transform: rotate(-15deg);
 }
 </style>
-

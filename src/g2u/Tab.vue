@@ -29,7 +29,7 @@ export default {
     onmousemove (e) {
       if (this.ismousedown) {
         this.drag_start({
-          type:'DragTab',
+          type: 'DragTab',
           startX: e.clientX,
           startY: e.clientY,
           param: {

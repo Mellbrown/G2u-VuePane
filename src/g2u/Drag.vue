@@ -24,9 +24,9 @@ export default {
     this.drag_init()
   },
   watch: {
-    ['sysdrag.type'] (_new, _old) {
+    'sysdrag.type' (_new, _old) {
       if (!!_new && !_old) {
-        window.addEventListener('mouseup',this.windowonmouseup)
+        window.addEventListener('mouseup', this.windowonmouseup)
         window.addEventListener('mousemove', this.windowonmousemove)
         this.clientPos = { x: this.sysdrag.startX, y: this.sysdrag.startY }
       }
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     windowonmouseup (e) {
-      window.removeEventListener('mouseup',this.windowonmouseup)
+      window.removeEventListener('mouseup', this.windowonmouseup)
       window.removeEventListener('mousemove', this.windowonmousemove)
       this.clientPos = null
       this.drag_cancle()
@@ -45,13 +45,13 @@ export default {
     ...mapMutations([
       'drag_init',
       'drag_cancle'
-      ])
+    ])
   },
   computed: {
     styPosition () {
       return {
         top: this.clientPos && this.clientPos.y + 'px',
-        left: this.clientPos && this.clientPos.x +'px'
+        left: this.clientPos && this.clientPos.x + 'px'
       }
     },
     ...mapState(['sysdrag'])

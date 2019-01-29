@@ -32,7 +32,7 @@
 import Tab from '@/g2u/Tab.vue'
 import DComp from '@/g2u/DComp.vue'
 import PaneDropZone from '@/g2u/PaneDropZone.vue'
-import { mapMutations  } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   props: ['_id', 'type', 'param', 'parent', 'child'],
@@ -54,8 +54,7 @@ export default {
   },
   watch: {
     child () {
-      if(!this.child.find(ch => ch._id === this.content_id))
-        this.content_id = null
+      if (!this.child.find(ch => ch._id === this.content_id)) { this.content_id = null }
     }
   },
   computed: {
