@@ -1,14 +1,8 @@
 export default {
   pane_deactivate: (state, payload) => {
-    var context = payload
-    if (state.syspane.activate._id === context.grab._id) {
-      for (var _id in state.syspane.list) {
-        var pane = state.syspane.list[_id]
-        if (pane.type === 'pane') {
-          state.syspane.activate = pane
-          return
-        }
-      }
+    var _id = payload
+    if (state.syspane.activate && state.syspane.activate._id === _id) {
+      state.syspane.activate = null
     }
   },
   pane_activate: (state, payload) => {
@@ -50,11 +44,15 @@ export default {
     var grab = context.grab
     var parent = grab.parent
     parent.child = parent.child.filter(ch => {
-      return ch._id !== context.grab._id
+      return ch._id !== grab._id
     })
     grab.parent = null
-    state.syspane.list[context.grab] = undefined
-    delete state.syspane.list[context.grab]
+    state.syspane.list[grab._id] = undefined
+    delete state.syspane.list[grab._id]
+    if (grab.type === 'pane') {
+      state.syspane.lstpane[grab._id] = undefined
+      delete state.syspane.lstpane[grab._id]
+    }
   },
   pane_append: (state, payload) => {
     var { context, pane } = payload
@@ -64,6 +62,7 @@ export default {
     pane.parent = context.grab
     context.grab.child.splice(openAt, 0, pane)
     state.syspane.list[pane._id] = pane
+    if (pane.type === 'pane') state.syspane.lstpane[pane._id] = pane
     context.open = pane
   },
   pane_open: (state, payload) => {
@@ -82,6 +81,7 @@ export default {
     openAt = openAt >= 0 && openAt <= len ? openAt : len
     grab.child.splice(openAt, 0, pane)
     state.syspane.list[_id] = pane
+    if (type === 'pane') state.syspane.lstpane[_id] = pane
     context.open = pane
   },
   pane_grab (state, payload) {
@@ -119,6 +119,7 @@ export default {
       list: {
         [_id]: root
       },
+      lstpane: { },
       root,
       activate: root
     }

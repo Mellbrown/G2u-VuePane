@@ -15,7 +15,16 @@ export default new Vuex.Store({
     ...Syspane,
     ...Sysdrag
   },
-  actions: {
+  getters: {
+    pane_activate (state) {
+      if (state.syspane.activate === null) {
+        for (var _id in state.syspane.lstpane) {
+          state.syspane.activate = state.syspane.lstpane[_id]
+          break
+        }
+      }
 
+      return state.syspane.activate
+    }
   }
 })

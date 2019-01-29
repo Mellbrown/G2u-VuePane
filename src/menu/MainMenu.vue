@@ -8,15 +8,16 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState, mapGetters } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['syspane'])
+    ...mapState(['syspane']),
+    ...mapGetters(['pane_activate'])
   },
   methods: {
     openHello () {
-      var context = { grab: this.syspane.activate }
+      var context = { grab: this.pane_activate }
       this.pane_open({ context, type: 'HelloWorld', param: { title: 'Untitled' } })
     },
     requestClose () {

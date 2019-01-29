@@ -1,7 +1,7 @@
 <template>
   <div class="flex grow border border-dark">
     <div class="g2u-tabs flex h-left bg-secondary shadow">
-      <tab v-for="(tab, t) in child" :key="tab._id"
+      <tab v-for="tab in child" :key="tab._id"
         :_id="tab._id"
         :type="tab.type"
         :param="tab.param"
@@ -40,9 +40,7 @@ export default {
     this.activate()
   },
   beforeDestroy () {
-    var context = {}
-    this.pane_grab({ context, _id: this._id })
-    this.pane_deactivate(context)
+    this.pane_deactivate(this._id)
   },
   methods: {
     onTabSelected (_id) {
