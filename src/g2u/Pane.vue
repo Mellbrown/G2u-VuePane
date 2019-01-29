@@ -1,7 +1,7 @@
 <template>
   <div class="flex grow border border-dark">
     <div class="g2u-tabs flex h-left bg-secondary shadow">
-      <tab v-for="(tab, t) in child" :key="t"
+      <tab v-for="(tab, t) in child" :key="tab._id"
         :_id="tab._id"
         :type="tab.type"
         :param="tab.param"

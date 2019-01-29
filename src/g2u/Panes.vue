@@ -1,6 +1,6 @@
 <template>
   <div class="flex grow" :class="clsDirection">
-    <div v-for="(ch,c) in child" :key="c" class="flex" :style="styBounds[c]">
+    <div v-for="(ch,c) in child" :key="ch._id" class="flex" :style="styBounds[c]">
       <panes v-if="ch.type === 'panes'"
         :_id="ch._id"
         :type="ch.type"

@@ -78,8 +78,8 @@ export default {
       child: []
     }
     var len = grab.child.length
-    var openAt = context.openAt || grab.child.length
-    openAt = openAt > 0 && openAt <= len ? openAt : len
+    var openAt = context.openAt === undefined ? grab.child.length : context.openAt
+    openAt = openAt >= 0 && openAt <= len ? openAt : len
     grab.child.splice(openAt, 0, pane)
     state.syspane.list[_id] = pane
     context.open = pane
