@@ -3,8 +3,8 @@
     :class="clTabActivatedColor"
     @click.left="activateTab"
     @click.middle="closeTab"
-    @mousedown="ismousedown = true"
-    @mouseup="ismousedown = false"
+    @mousedown.left="ismousedown = true"
+    @mouseup.left="ismousedown = false"
     @mouseleave="ismousedown = false"
     @mousemove="onmousemove">
     <button class="btn mr-1 p-0"

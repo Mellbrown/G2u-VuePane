@@ -1,4 +1,8 @@
 export default {
+  pane_nobar: (state, payload) => {
+    var nobar = payload
+    state.syspane.nobar = nobar
+  },
   pane_deactivate: (state, payload) => {
     var _id = payload
     if (state.syspane.activate && state.syspane.activate._id === _id) {
@@ -119,6 +123,7 @@ export default {
       list: {
         [_id]: root
       },
+      nobar: false,
       lstpane: { },
       root,
       activate: root

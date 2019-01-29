@@ -1,6 +1,6 @@
 <template>
   <div class="flex grow border border-dark">
-    <div class="g2u-tabs flex h-left bg-secondary shadow">
+    <div class="g2u-tabs flex h-left bg-secondary shadow" v-show="nobar">
       <tab v-for="tab in child" :key="tab._id"
         :_id="tab._id"
         :type="tab.type"
@@ -32,7 +32,7 @@
 import Tab from '@/g2u/Tab.vue'
 import DComp from '@/g2u/DComp.vue'
 import PaneDropZone from '@/g2u/PaneDropZone.vue'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 
 export default {
   props: ['_id', 'type', 'param', 'parent', 'child'],
@@ -90,7 +90,10 @@ export default {
         },
         parent: this.parent
       }
-    }
+    },
+    ...mapState({
+      nobar: state => state.syspane.nobar || false
+    })
   },
   components: { Tab, DComp, PaneDropZone }
 }

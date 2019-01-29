@@ -7,8 +7,8 @@
         @click="toggleMenu('MainMenu')">
         G2u</div>
       <div class="btn p-2 m-1"
-        :class="current === 'other' ? ['bg-secondary'] : []"
-        @click="toggleMenu('other')">
+        :class="nobar ? ['bg-secondary'] : []"
+        @click="pane_nobar(!nobar)">
         <icon icon="adjust" size="lg" color="white"/>
       </div>
       <div class="flex grow v-stack">
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import MainMenu from '@/menu/MainMenu.vue'
 
 export default {
@@ -35,6 +35,11 @@ export default {
       current: ''
     }
   },
+  computed: {
+    ...mapState({
+      nobar: state => state.syspane.nobar || false
+    })
+  },
   methods: {
     toggleMenu (menu) {
       if (this.current === menu) {
@@ -44,7 +49,7 @@ export default {
     requestClose () {
       this.current = null
     },
-    ...mapMutations(['pane_grab', 'pane_resize'])
+    ...mapMutations(['pane_grab', 'pane_resize', 'pane_nobar'])
   },
   watch: {
     current (_new, _old) {

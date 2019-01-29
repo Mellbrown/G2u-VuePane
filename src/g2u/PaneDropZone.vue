@@ -56,7 +56,7 @@ export default {
         this.pane_close(context)
         let pop = context.grab
         context.grab = context.open
-        this.pane_append({ context, pane: pop }) // 기존거 복구
+        if (pop.child.length !== 0) this.pane_append({ context, pane: pop }) // 기존거 복구
         context.openAt = over === 'top' ? 0 : 1
         this.pane_open({ context, type: 'pane', param: {} }) // pane 열기
         context.grab = context.open
@@ -78,7 +78,7 @@ export default {
         this.pane_close(context)
         let pop = context.grab
         context.grab = context.open
-        this.pane_append({ context, pane: pop }) // 기존거 복구
+        if (pop.child.length !== 0) this.pane_append({ context, pane: pop }) // 기존거 복구
         context.openAt = over === 'left' ? 0 : 1
         this.pane_open({ context, type: 'pane', param: {} }) // pane 열기
         context.grab = context.open
