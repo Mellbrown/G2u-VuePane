@@ -50,8 +50,8 @@ export default {
   computed: {
     styPosition () {
       return {
-        top: this.clientPos && this.clientPos.y + 'px',
-        left: this.clientPos && this.clientPos.x + 'px'
+        top: this.clientPos && this.clientPos.y + 5 + 'px',
+        left: this.clientPos && this.clientPos.x + 5 + 'px'
       }
     },
     ...mapState(['sysdrag'])

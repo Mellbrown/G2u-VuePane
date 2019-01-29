@@ -25,6 +25,9 @@ export default {
       ismousedown: false
     }
   },
+  mounted () {
+    this.activateTab()
+  },
   methods: {
     onmousemove (e) {
       if (this.ismousedown) {
@@ -34,7 +37,8 @@ export default {
           startY: e.clientY,
           param: {
             title: this.param.title
-          }
+          },
+          drop: this._id
         })
       }
     },
@@ -63,9 +67,12 @@ export default {
 <style lang="scss" scoped>
 .g2u-tab {
   max-width: 150px;
+  min-width: 0px;
   overflow: hidden;
   .tab-title {
+    min-width: 0px;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
   }
 }

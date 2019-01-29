@@ -1,7 +1,31 @@
 export default {
+  pane_deactivate: (state, payload) => {
+    var context = payload
+    if (state.syspane.activate._id === context.grab._id) {
+      for (var _id in state.syspane.list) {
+        var pane = state.syspane.list[_id]
+        if (pane.type === 'pane') {
+          state.syspane.activate = pane
+          return
+        }
+      }
+    }
+  },
   pane_activate: (state, payload) => {
     var context = payload
     state.syspane.activate = context.grab
+  },
+  pane_param: (state, payload) => {
+    var { context, param, overwrite } = payload
+    var grab = context.grab
+    if (overwrite) {
+      grab.param = param
+    } else {
+      grab.param = {
+        ...grab.param,
+        ...param
+      }
+    }
   },
   pane_resize: (state, payload) => {
     var { context, size } = payload
@@ -11,6 +35,16 @@ export default {
       ...size
     }
   },
+  pane_nth: (state, payload) => {
+    var { context, _id } = payload
+    for (var i in context.grab.child) {
+      if (context.grab.child[i]._id === _id) {
+        context.nth = Number(i)
+        return
+      }
+    }
+    context.nth = -1
+  },
   pane_close: (state, payload) => {
     var context = payload
     var grab = context.grab
@@ -18,8 +52,19 @@ export default {
     parent.child = parent.child.filter(ch => {
       return ch._id !== context.grab._id
     })
+    grab.parent = null
     state.syspane.list[context.grab] = undefined
     delete state.syspane.list[context.grab]
+  },
+  pane_append: (state, payload) => {
+    var { context, pane } = payload
+    var len = context.grab.child.length
+    var openAt = context.openAt || context.grab.child.length
+    openAt = openAt > 0 && openAt <= len ? openAt : len
+    pane.parent = context.grab
+    context.grab.child.splice(openAt, 0, pane)
+    state.syspane.list[pane._id] = pane
+    context.open = pane
   },
   pane_open: (state, payload) => {
     var { context, type, param } = payload
@@ -32,7 +77,10 @@ export default {
       parent: grab,
       child: []
     }
-    grab.child.push(pane)
+    var len = grab.child.length
+    var openAt = context.openAt || grab.child.length
+    openAt = openAt > 0 && openAt <= len ? openAt : len
+    grab.child.splice(openAt, 0, pane)
     state.syspane.list[_id] = pane
     context.open = pane
   },

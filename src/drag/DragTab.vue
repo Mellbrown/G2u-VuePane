@@ -13,6 +13,10 @@ export default {
 <style lang="scss" scoped>
 .g2u-drag-tab {
   width: 150px;
+  min-width: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transform: rotate(-15deg);
 }
 </style>

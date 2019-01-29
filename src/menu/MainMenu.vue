@@ -1,8 +1,8 @@
 <template>
-  <div class="flex grow">
+  <div class="flex grow" @mouseleave="requestClose">
     <h1 class="m-1">메뉴</h1>
     <div class="btn bg-light m-2" @click="openHello">
-      헬로
+      HelloWorld 🙌
     </div>
   </div>
 </template>
@@ -18,6 +18,9 @@ export default {
     openHello () {
       var context = { grab: this.syspane.activate }
       this.pane_open({ context, type: 'HelloWorld', param: { title: 'Untitled' } })
+    },
+    requestClose () {
+      this.$emit('request-close')
     },
     ...mapMutations(['pane_open'])
   }

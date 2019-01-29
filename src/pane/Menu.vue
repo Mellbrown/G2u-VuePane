@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <component :is="current" v-if="current" />
+    <component :is="current" v-if="current" @request-close="requestClose"/>
   </div>
 </template>
 
@@ -40,6 +40,9 @@ export default {
       if (this.current === menu) {
         this.current = null
       } else this.current = menu
+    },
+    requestClose () {
+      this.current = null
     },
     ...mapMutations(['pane_grab', 'pane_resize'])
   },
