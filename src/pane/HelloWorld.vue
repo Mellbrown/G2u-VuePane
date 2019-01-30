@@ -1,5 +1,5 @@
 <template>
-  <div class="flex grow p-3">
+  <div class="flex grow p-3 container">
     <h3>저는 {{_id}}입니다.</h3>
     <p>만나서 반갑습니다.</p>
     <h3>별칭은 {{param.alias || '?'}}</h3>

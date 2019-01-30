@@ -21,8 +21,8 @@ function PaneSplit (state, payload) {
   var pane = context.grab
   var panes = pane.parent
   var changeDirection =
-    (panes.direction === 'vertical' && (splitTo === 'left' || splitTo === 'right')) ||
-    (panes.direction !== 'vertical' && (splitTo === 'top' || splitTo === 'bottom'))
+    (panes.param.direction === 'vertical' && (splitTo === 'left' || splitTo === 'right')) ||
+    (panes.param.direction !== 'vertical' && (splitTo === 'top' || splitTo === 'bottom'))
 
   {
     let context = { grab: panes }
@@ -32,7 +32,7 @@ function PaneSplit (state, payload) {
       PaneOpen(state, { context,
         type: 'panes',
         param: {
-          direction: panes.direction === 'vertical' ? 'horizontal' : 'vertical'
+          direction: panes.param.direction === 'vertical' ? 'horizontal' : 'vertical'
         }
       }) // 기존 자리에 새 Panes
       PaneClose(state, { grab: pane }) // 기존 Pane Pop
@@ -178,7 +178,7 @@ function PaneInit (state) {
     list: {
       [_id]: root
     },
-    nobar: false,
+    nobar: true,
     lstpane: { },
     root,
     activate: root

@@ -1,8 +1,12 @@
 <template>
   <div class="flex grow" @mouseleave="requestClose">
-    <h1 class="m-1">메뉴</h1>
+    <h1 class="m-2 text-center">메뉴</h1>
+    <div class="border mb-2"/>
     <div class="btn bg-light m-2" @click="openHello">
       HelloWorld 🙌
+    </div>
+    <div class="btn bg-light m-2" @click="openCal">
+      달력 📆
     </div>
   </div>
 </template>
@@ -16,6 +20,10 @@ export default {
     ...mapGetters(['pane_activate'])
   },
   methods: {
+    openCal () {
+      var context = { grab: this.pane_activate }
+      this.pane_open({ context, type: 'FullCalendar', param: { title: '📆 달력' } })
+    },
     openHello () {
       var context = { grab: this.pane_activate }
       this.pane_open({ context, type: 'HelloWorld', param: { title: 'Untitled' } })

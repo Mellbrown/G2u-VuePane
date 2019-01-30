@@ -1,10 +1,10 @@
 <template>
   <div :class="clsWrapcontent">
     <component v-if="component" :is="component"
-      :_id="_id"
-      :type="type"
-      :param="param"
-      :parent="parent"/>
+      :_id="ready && ready._id"
+      :type="ready && ready.type"
+      :param="ready && ready.param"
+      :parent="ready && ready.parent"/>
   </div>
 </template>
 
@@ -13,7 +13,8 @@ export default {
   props: ['path', '_id', 'type', 'param', 'parent', 'wrap_content'],
   data () {
     return {
-      component: null
+      component: null,
+      ready: null
     }
   },
   computed: {
@@ -27,8 +28,8 @@ export default {
       return this.wrap_content ? ['in-block'] : ['flex', 'grow']
     }
   },
-  watch: {
-    type () {
+  methods: {
+    load () {
       this.loader()
         .then(() => {
           this.component = () => this.loader()
@@ -38,14 +39,21 @@ export default {
         })
     }
   },
+  watch: {
+    _id () {
+      this.load()
+    },
+    component () {
+      this.ready = {
+        _id: this._id,
+        type: this.type,
+        param: this.param,
+        parent: this.parent
+      }
+    }
+  },
   mounted () {
-    this.loader()
-      .then(() => {
-        this.component = () => this.loader()
-      })
-      .catch(() => {
-        this.component = () => import('@/g2u/default.vue')
-      })
+    this.load()
   }
 }
 </script>

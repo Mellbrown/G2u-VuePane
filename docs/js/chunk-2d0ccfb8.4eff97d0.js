@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0ccfb8"],{"4ff6":function(n,e,l){"use strict";l.r(e);var t=function(){var n=this,e=n.$createElement,l=n._self._c||e;return l("div",{staticClass:"felx grow bg-info"})},c=[],s={},u=s,a=l("2877"),i=Object(a["a"])(u,t,c,!1,null,null,null);i.options.__file="FullCalendar.vue";e["default"]=i.exports}}]);
+//# sourceMappingURL=chunk-2d0ccfb8.4eff97d0.js.map

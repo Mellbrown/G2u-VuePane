@@ -1,10 +1,10 @@
 <template>
-  <div class="df fg fb" >
-
+  <div class="felx grow bg-info" >
   </div>
 </template>
 
 <script>
+
 export default {
 
 }
