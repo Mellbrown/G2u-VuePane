@@ -110,8 +110,8 @@ function PaneClose (state, payload) {
 function PaneAppend (state, payload) {
   var { context, pane } = payload
   var len = context.grab.child.length
-  var openAt = context.openAt || context.grab.child.length
-  openAt = openAt > 0 && openAt <= len ? openAt : len
+  var openAt = context.openAt === undefined ? context.grab.child.length : context.openAt
+  openAt = openAt >= 0 && openAt <= len ? openAt : len
   pane.parent = context.grab
   context.grab.child.splice(openAt, 0, pane)
   state.syspane.list[pane._id] = pane

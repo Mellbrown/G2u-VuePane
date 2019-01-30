@@ -32,7 +32,6 @@ export default {
     onActivate () {
       var context = {}
       this.pane_grab({ context, _id: this._id })
-      if (!context.grab) return
       this.pane_setTitle({ context, title: '🙌 ' + this.param.alias })
     },
     setalias () {

@@ -34,8 +34,16 @@ import { mapMutations } from 'vuex'
 export default {
   props: ['_id', 'type', 'param', 'parent', 'child'],
   name: 'panes',
+  mounted () {
+    this.selfRemover()
+  },
   watch: {
     child () {
+      this.selfRemover()
+    }
+  },
+  methods: {
+    selfRemover () {
       if (this.child.length <= 1) {
         if (this.child.length === 1) {
           // 먼저 자식 제거
@@ -53,9 +61,7 @@ export default {
         this.pane_grab({ context, _id: this._id })
         this.pane_close(context)
       }
-    }
-  },
-  methods: {
+    },
     ...mapMutations(['pane_close', 'pane_grab', 'pane_nth', 'pane_append'])
   },
   computed: {
