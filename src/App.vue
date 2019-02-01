@@ -19,13 +19,13 @@ export default {
     this.pane_init()
     var context = {}
     this.pane_root(context)
-    this.pane_open({ context, type: 'Menu', param: { width: 'auto' } })
+    this.pane_open({ context, type: 'Menu', param: { width: 'auto', resize: false } })
     this.pane_open({ context, type: 'pane', param: {} })
     context.grab = context.open
     this.pane_open({
       context,
       type: 'FullCalendar',
-      param: { title: '📆 달력'}
+      param: { title: '📆 달력' }
     })
   },
   computed: {

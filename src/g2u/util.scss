@@ -19,6 +19,8 @@ html, body, #app {
 .h-right { flex-direction: row-reverse; }
 .v-stack { flex-direction: column-reverse; }
 .point { cursor: pointer; }
+.h-resize { cursor: e-resize;}
+.v-resize { cursor: n-resize;}
 
 .relative { position: relative; }
 .absolute { position: absolute;}
@@ -31,6 +33,7 @@ html, body, #app {
 }
 
 .baseline { vertical-align: baseline; }
+.a-center { align-items: center; }
 
 .shadow { filter: drop-shadow(0px 10px 5px rgba(0,0,0,0.5)); }
 

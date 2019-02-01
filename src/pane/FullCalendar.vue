@@ -61,15 +61,15 @@ export default {
   },
   methods: {
     onmousewheel (e) {
-      var dy = e.deltaY;
+      var dy = e.deltaY
       dy >= 0 ? this.nextMonth() : this.prevMonth()
     },
     nextMonth () {
-      this.curMonth.add(1,'M')
+      this.curMonth.add(1, 'M')
       this.curMonth = moment(this.curMonth)
     },
     prevMonth () {
-      this.curMonth.add(-1,'M')
+      this.curMonth.add(-1, 'M')
       this.curMonth = moment(this.curMonth)
     },
     currentMonth () {
@@ -83,7 +83,7 @@ export default {
       var txtM = this.curMonth.format('YYYYMM')
       var d = moment(this.curMonth)
       d.day(1)
-      
+
       var items = []
       for (var r = 0; r < 6; r++) {
         let row = []
@@ -98,7 +98,7 @@ export default {
           row.push(col0)
         }
         for (var c = 1; c < 8; c++) {
-          var toMonth = txtM === d.format('YYYYMM') 
+          var toMonth = txtM === d.format('YYYYMM')
           let col = {
             title: toMonth ? d.format('DD') : d.format('MM/DD'),
             desc: '📄',
@@ -108,7 +108,7 @@ export default {
             }
           }
           row.push(col)
-          d.add(1,'d')
+          d.add(1, 'd')
         }
         items.push(row)
       }
@@ -116,9 +116,9 @@ export default {
     },
     lbWeeks () {
       var l = ['일', '월', '화', '수', '목', '금', '토']
-      if (this.option.showWeek) l.splice(0,0,'주차')
+      if (this.option.showWeek) l.splice(0, 0, '주차')
       return l
-    },
+    }
   },
   components: { }
 }
@@ -129,4 +129,3 @@ export default {
   border-right: solid 1pt white
 }
 </style>
-

@@ -32,9 +32,13 @@ function PaneSplit (state, payload) {
       PaneOpen(state, { context,
         type: 'panes',
         param: {
-          direction: panes.param.direction === 'vertical' ? 'horizontal' : 'vertical'
+          direction: panes.param.direction === 'vertical' ? 'horizontal' : 'vertical',
+          height: pane.param.height,
+          width: pane.param.width
         }
       }) // 기존 자리에 새 Panes
+      pane.param.height = undefined
+      pane.param.width = undefined
       PaneClose(state, { grab: pane }) // 기존 Pane Pop
       context = { grab: context.open }
       if (pane.child.length !== 0) PaneAppend(state, { context, pane })

@@ -32,7 +32,8 @@ export default {
   props: ['_id', 'type', 'param', 'parent'],
   data () {
     return {
-      current: ''
+      current: '',
+      size: null
     }
   },
   computed: {
@@ -56,9 +57,10 @@ export default {
       var context = {}
       this.pane_grab({ context, _id: this._id })
       if (!_new && !!_old) { // 사라졌다
-        this.pane_resize({ context, size: { width: 'auto' } })
+        this.size = context.grab.param.width
+        this.pane_resize({ context, size: { width: 'auto', resize: false } })
       } else if (!!_new && !_old) { // 생겼다
-        this.pane_resize({ context, size: { width: '300px' } })
+        this.pane_resize({ context, size: { width: this.size || '300px', resize: true } })
       }
     }
   }
