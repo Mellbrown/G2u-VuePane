@@ -22,11 +22,11 @@ export default {
   methods: {
     openCal () {
       var context = { grab: this.pane_activate }
-      this.pane_open({ context, type: 'FullCalendar', param: { title: '📆 달력' } })
+      this.pane_open({ context, type: 'FullCalendar', param: { title: '📆 달력'} })
     },
     openHello () {
       var context = { grab: this.pane_activate }
-      this.pane_open({ context, type: 'HelloWorld', param: { title: 'Untitled' } })
+      this.pane_open({ context, type: 'HelloWorld', param: { title: '🙌 HelloWorld'} })
     },
     requestClose () {
       this.$emit('request-close')

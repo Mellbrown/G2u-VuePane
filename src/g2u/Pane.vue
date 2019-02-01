@@ -1,6 +1,6 @@
 <template>
   <div class="flex grow border border-dark">
-    <div class="g2u-tabs flex h-left bg-secondary shadow" v-show="nobar">
+    <div class="g2u-tabs flex h-left bg-secondary shadow z-tab" v-show="nobar">
       <tab v-for="tab in child" :key="tab._id"
         :_id="tab._id"
         :type="tab.type"

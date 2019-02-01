@@ -24,10 +24,8 @@ export default {
     context.grab = context.open
     this.pane_open({
       context,
-      type: 'HelloWorld',
-      param: {
-        title: '만나서 반갑습니다.'
-      }
+      type: 'FullCalendar',
+      param: { title: '📆 달력'}
     })
   },
   computed: {

@@ -17,23 +17,12 @@ export default {
     }
   },
   props: ['_id', 'type', 'param', 'parent'],
-  mounted () {
-    this.onActivate()
-  },
   watch: {
-    _id () {
-      this.onActivate()
-    },
     param () {
       this.text = this.param.alias
     }
   },
   methods: {
-    onActivate () {
-      var context = {}
-      this.pane_grab({ context, _id: this._id })
-      this.pane_setTitle({ context, title: '🙌 ' + this.param.alias })
-    },
     setalias () {
       var context = {}
       this.pane_grab({ context, _id: this._id })

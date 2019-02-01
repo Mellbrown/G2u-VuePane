@@ -11,7 +11,7 @@
       @click.stop="closeTab">
       <icon icon="times"/>
     </button>
-    <small class="tab-title in-block grow mr-2">{{param.title}}</small>
+    <small class="tab-title in-block grow mr-2">{{param && param.title || '???'}}</small>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
           startX: e.clientX,
           startY: e.clientY,
           param: {
-            title: this.param.title
+            title: this.param && this.param.title || '???'
           },
           drop: this._id
         })
